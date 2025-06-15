@@ -2,75 +2,101 @@ import streamlit as st
 import random
 import time
 
-# Father's Day message
-message_text = (
-    "HAPPY FATHER'S DAY THATHI ❤️\n\n"
-    "Thank you for being our rock, our guide, and our biggest supporter.\n"
-    "Your strength and unconditional love have shaped us to who we are today.\n"
-    "We are so grateful for all the lessons, laughs, and late-night talks.\n"
-    "You're our hero.\n"
-    "Love you always.\n\n"
-    "From Jonathan, Mystica, Elisha and Aaron 💙"
-)
+# -------------------------------
+# Configuration
+# -------------------------------
+st.set_page_config(page_title="Father's Day Surprise 🎁", page_icon="🎁", layout="wide")
 
-# Dad jokes
+# Background styling (dark theme + custom font)
+st.markdown("""
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap');
+
+        html, body {
+            background-color: #0f0f0f;
+            color: #f0f0f0;
+            font-family: 'Raleway', sans-serif;
+        }
+
+        .big-text {
+            font-size: 28px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .firework {
+            font-size: 45px;
+            animation: pop 0.3s ease-in-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0.5); opacity: 0.5; }
+            100% { transform: scale(1.2); opacity: 1; }
+        }
+    </style>
+""", unsafe_allow_html=True)
+
+# -------------------------------
+# Content
+# -------------------------------
+
+message_text = """
+❤️ **HAPPY FATHER'S DAY THATHI** ❤️  
+Thank you for being our rock, our guide, and our biggest supporter.  
+Your strength and unconditional love have shaped us into who we are today.  
+We're so grateful for all the lessons, laughs, and late-night talks.  
+You're our hero. Love you always.  
+From Jonathan, Mystica, Elisha, and Aaron 💙
+"""
+
 dad_jokes = [
     "Why did the scarecrow win an award? Because he was outstanding in his field! 🌾",
-    "I only know 25 letters of the alphabet. I don't know y. 🤷",
     "What do you call fake spaghetti? An impasta! 🍝",
-    "Why don’t eggs tell jokes? They’d crack each other up. 🥚😂",
-    "Dad, can you put my shoes on? No, I don’t think they’ll fit me. 👟"
+    "How do you organize a space party? You planet! 🪐",
+    "I'm on a seafood diet. I see food and I eat it. 🍽️",
+    "I would tell you a joke about construction, but I’m still working on it. 🛠️"
 ]
 
-# Page config
-st.set_page_config(page_title="Father's Day Surprise 🎁", page_icon="🎁")
+firework_emojis = ["✨", "🎇", "🌟", "💥", "🎆", "🧨", "🌠", "🎉", "💫"]
 
-# Title
-st.markdown("<h1 style='text-align: center;'>🎁 Father's Day Surprise 🎁</h1>", unsafe_allow_html=True)
-st.markdown("### 👇 Tap below to begin the magic!")
+# -------------------------------
+# App Logic
+# -------------------------------
 
-# Init session state
 if 'started' not in st.session_state:
     st.session_state.started = False
     st.rerun()
 
+st.markdown("<h1 style='text-align: center;'>🎁 Father's Day Surprise 🎁</h1>", unsafe_allow_html=True)
+
 if not st.session_state.started:
+    st.markdown("<div class='big-text'>👇 Tap the button below to start the magic!</div>", unsafe_allow_html=True)
     center = st.columns(3)
     with center[1]:
         if st.button("💝 Start Surprise"):
             st.session_state.started = True
             st.rerun()
 else:
-    st.markdown("## 🎆 Fireworks Show Begins!")
+    # Firework Animation
+    st.markdown("### 🎆 Fireworks Show 🎆")
+    cols = st.columns(7)
+    placeholders = [col.empty() for col in cols]
 
-    # Animated Fireworks Show
-    emoji_list = ["✨", "🎇", "🌟", "💥", "🎆", "🧨"]
-    cols = st.columns(5)
-    slots = [col.empty() for col in cols]
-
-    for _ in range(30):  # 30 frames of animation
-        for slot in slots:
-            slot.markdown(
-                f"<div style='font-size:40px; text-align:center'>{random.choice(emoji_list)}</div>",
-                unsafe_allow_html=True
-            )
+    for _ in range(20):
+        for placeholder in placeholders:
+            placeholder.markdown(f"<div class='firework' style='text-align:center'>{random.choice(firework_emojis)}</div>", unsafe_allow_html=True)
         time.sleep(0.2)
 
     st.markdown("---")
+    
+    # Reveal the heartfelt message
+    st.markdown("## 💌 A Special Message for You")
+    with st.container():
+        st.success(message_text)
 
-    # Message section
-    st.subheader("❤️ A Message From Us")
-    st.success(message_text)
-
-    # Jokes section
     st.markdown("---")
+
+    # Dad joke section with random joke on click
     with st.expander("🤣 Want a Dad Joke?"):
         if st.button("Click for a Joke!"):
-            st.info(random.choice(dad_jokes))
-
-    st.markdown("---")
-    center = st.columns(3)
-    with center[1]:
-        if st.button("🔁 Replay Surprise"):
-            st.session_state.started = False
-            st.rerun()
+            st.info(random.choice(
