@@ -29,7 +29,7 @@ st.set_page_config(page_title="Father's Day Surprise 🎁", page_icon="🎁")
 st.markdown("""
     <style>
     .stApp {
-        background-image: url('https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0');
+        background-image: url('https://media.istockphoto.com/id/1496490916/vector/fathers-day-seamless-wallpaper.jpg?s=1024x1024&w=is&k=20&c=YlEj65eVA_4Wlw4C_Bnr1D0Yse9HHa0BbEgKn4pHYHE=');
         background-size: cover;
         background-attachment: fixed;
     }
