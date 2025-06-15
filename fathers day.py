@@ -25,16 +25,7 @@ dad_jokes = [
 # Page config
 st.set_page_config(page_title="Father's Day Surprise 🎁", page_icon="🎁")
 
-# Optional background image
-st.markdown("""
-    <style>
-    .stApp {
-        background-image: url('https://media.istockphoto.com/id/1496490916/vector/fathers-day-seamless-wallpaper.jpg?s=1024x1024&w=is&k=20&c=YlEj65eVA_4Wlw4C_Bnr1D0Yse9HHa0BbEgKn4pHYHE=');
-        background-size: cover;
-        background-attachment: fixed;
-    }
-    </style>
-""", unsafe_allow_html=True)
+# Removed background image
 
 st.markdown("<h1 style='text-align: center;'>🎁 Father's Day Surprise 🎁</h1>", unsafe_allow_html=True)
 st.markdown("### 👇 Tap below to begin the magic!")
@@ -63,7 +54,7 @@ else:
     st.markdown("---")
 
     # Message section
-    st.subheader("❤️ A Message From Your Kids")
+    st.subheader("❤️ A Message From Us")
     st.success(message_text)
 
     # Jokes with expandable style
