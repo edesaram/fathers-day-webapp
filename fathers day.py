@@ -2,44 +2,47 @@ import streamlit as st
 import random
 import time
 
-# -------------------------------
-# Configuration
-# -------------------------------
+# Page config
 st.set_page_config(page_title="Father's Day Surprise 🎁", page_icon="🎁", layout="wide")
 
-# Background styling (dark theme + custom font)
+# 🎇 Background GIF Styling
 st.markdown("""
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&display=swap');
 
-        html, body {
-            background-color: #0f0f0f;
-            color: #f0f0f0;
-            font-family: 'Raleway', sans-serif;
-        }
+    body {
+        background-image: url('https://media.giphy.com/media/3o6ZsY8uFCDRrL6U9C/giphy.gif');
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+    }
 
-        .big-text {
-            font-size: 28px;
-            text-align: center;
-            padding: 20px;
-        }
+    html, body, [class*="css"] {
+        font-family: 'Raleway', sans-serif;
+        color: #fff !important;
+        background-color: rgba(0, 0, 0, 0.6) !important;
+    }
 
-        .firework {
-            font-size: 45px;
-            animation: pop 0.3s ease-in-out;
-        }
+    .firework {
+        font-size: 45px;
+        animation: pop 0.3s ease-in-out;
+    }
 
-        @keyframes pop {
-            0% { transform: scale(0.5); opacity: 0.5; }
-            100% { transform: scale(1.2); opacity: 1; }
-        }
+    @keyframes pop {
+        0% { transform: scale(0.5); opacity: 0.5; }
+        100% { transform: scale(1.2); opacity: 1; }
+    }
+
+    .big-text {
+        font-size: 28px;
+        text-align: center;
+        padding: 20px;
+    }
+
     </style>
 """, unsafe_allow_html=True)
 
-# -------------------------------
-# Content
-# -------------------------------
-
+# Message & jokes
 message_text = """
 ❤️ **HAPPY FATHER'S DAY THATHI** ❤️  
 Thank you for being our rock, our guide, and our biggest supporter.  
@@ -59,10 +62,7 @@ dad_jokes = [
 
 firework_emojis = ["✨", "🎇", "🌟", "💥", "🎆", "🧨", "🌠", "🎉", "💫"]
 
-# -------------------------------
-# App Logic
-# -------------------------------
-
+# App logic
 if 'started' not in st.session_state:
     st.session_state.started = False
     st.rerun()
@@ -77,7 +77,7 @@ if not st.session_state.started:
             st.session_state.started = True
             st.rerun()
 else:
-    # Firework Animation
+    # Fireworks animation
     st.markdown("### 🎆 Fireworks Show 🎆")
     cols = st.columns(7)
     placeholders = [col.empty() for col in cols]
@@ -88,15 +88,14 @@ else:
         time.sleep(0.2)
 
     st.markdown("---")
-    
-    # Reveal the heartfelt message
+
+    # Message reveal
     st.markdown("## 💌 A Special Message for You")
-    with st.container():
-        st.success(message_text)
+    st.success(message_text)
 
     st.markdown("---")
 
-    # Dad joke section with random joke on click
+    # Dad jokes
     with st.expander("🤣 Want a Dad Joke?"):
         if st.button("Click for a Joke!"):
             st.info(random.choice(dad_jokes))
