@@ -2,7 +2,6 @@ import streamlit as st
 import random
 import time
 
-# --- Heartfelt message ---
 message_text = (
     "HAPPY FATHER'S DAY THATHI\n\n"
     "Thank you for being our rock, our guide, and our biggest supporter.\n"
@@ -13,7 +12,6 @@ message_text = (
     "From Jonathan, Mystica, Elisha and Aaron 💙"
 )
 
-# --- Dad jokes ---
 dad_jokes = [
     "Why did the scarecrow win an award? Because he was outstanding in his field!",
     "I only know 25 letters of the alphabet. I don't know y.",
@@ -22,11 +20,9 @@ dad_jokes = [
     "Dad, can you put my shoes on? No, I don’t think they’ll fit me."
 ]
 
-# --- Title ---
 st.set_page_config(page_title="Father's Day Surprise", page_icon="🎁")
 st.title("🎁 Father's Day Surprise")
 
-# --- Start surprise ---
 if 'started' not in st.session_state:
     st.session_state.started = False
 
@@ -49,4 +45,7 @@ else:
     if st.button("Tell Me a Dad Joke 😄"):
         st.info(random.choice(dad_jokes))
 
-    st.button("🎉 Replay Surprise", on_click=lambda: st.session_state.update(started=False))
+    def reset():
+        st.session_state['started'] = False
+
+    st.button("🎉 Replay Surprise", on_click=reset)
