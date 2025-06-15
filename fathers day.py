@@ -99,4 +99,13 @@ else:
     # Dad joke section with random joke on click
     with st.expander("🤣 Want a Dad Joke?"):
         if st.button("Click for a Joke!"):
-            st.info(random.choice(
+            st.info(random.choice(dad_jokes))
+
+    st.markdown("---")
+
+    # Replay button
+    center = st.columns(3)
+    with center[1]:
+        if st.button("🔁 Replay the Magic"):
+            st.session_state.started = False
+            st.rerun()
