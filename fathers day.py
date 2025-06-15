@@ -2,8 +2,9 @@ import streamlit as st
 import random
 import time
 
+# Father's Day message
 message_text = (
-    "HAPPY FATHER'S DAY THATHI\n\n"
+    "HAPPY FATHER'S DAY THATHI ❤️\n\n"
     "Thank you for being our rock, our guide, and our biggest supporter.\n"
     "Your strength and unconditional love have shaped us to who we are today.\n"
     "We are so grateful for all the lessons, laughs, and late-night talks.\n"
@@ -12,40 +13,68 @@ message_text = (
     "From Jonathan, Mystica, Elisha and Aaron 💙"
 )
 
+# Dad jokes
 dad_jokes = [
-    "Why did the scarecrow win an award? Because he was outstanding in his field!",
-    "I only know 25 letters of the alphabet. I don't know y.",
-    "What do you call fake spaghetti? An impasta!",
-    "Why don’t eggs tell jokes? They’d crack each other up.",
-    "Dad, can you put my shoes on? No, I don’t think they’ll fit me."
+    "Why did the scarecrow win an award? Because he was outstanding in his field! 🌾",
+    "I only know 25 letters of the alphabet. I don't know y. 🤷",
+    "What do you call fake spaghetti? An impasta! 🍝",
+    "Why don’t eggs tell jokes? They’d crack each other up. 🥚😂",
+    "Dad, can you put my shoes on? No, I don’t think they’ll fit me. 👟"
 ]
 
-st.set_page_config(page_title="Father's Day Surprise", page_icon="🎁")
-st.title("🎁 Father's Day Surprise")
+# Page config
+st.set_page_config(page_title="Father's Day Surprise 🎁", page_icon="🎁")
+
+# Optional background image
+st.markdown("""
+    <style>
+    .stApp {
+        background-image: url('https://images.unsplash.com/photo-1504208434309-cb69f4fe52b0');
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+st.markdown("<h1 style='text-align: center;'>🎁 Father's Day Surprise 🎁</h1>", unsafe_allow_html=True)
+st.markdown("### 👇 Tap below to begin the magic!")
 
 if 'started' not in st.session_state:
     st.session_state.started = False
 
 if not st.session_state.started:
-    if st.button("Start Surprise 💝"):
-        st.session_state.started = True
-        st.experimental_rerun()
+    center = st.columns(3)
+    with center[1]:
+        if st.button("💝 Start Surprise"):
+            st.session_state.started = True
+            st.experimental_rerun()
 else:
-    st.markdown("### 🎇 Fireworks!")
-    for _ in range(20):
-        x = random.choice(["✨", "🎇", "🌟", "💥"])
-        st.markdown(f"<div style='font-size:30px'>{x}</div>", unsafe_allow_html=True)
-        time.sleep(0.1)
+    st.markdown("## 🎆 Fireworks Show Begins!")
+
+    emoji_list = ["✨", "🎇", "🌟", "💥", "🎆", "🧨"]
+    cols = st.columns(5)
+
+    for _ in range(30):
+        for i in range(5):
+            with cols[i]:
+                st.markdown(f"<div style='font-size:40px; text-align: center'>{random.choice(emoji_list)}</div>", unsafe_allow_html=True)
+        time.sleep(0.15)
 
     st.markdown("---")
+
+    # Message section
     st.subheader("❤️ A Message From Your Kids")
-    st.markdown(f"<pre style='color:blue; font-size:16px'>{message_text}</pre>", unsafe_allow_html=True)
+    st.success(message_text)
+
+    # Jokes with expandable style
+    st.markdown("---")
+    with st.expander("🤣 Want a Dad Joke?"):
+        if st.button("Click for a Joke!"):
+            st.info(random.choice(dad_jokes))
 
     st.markdown("---")
-    if st.button("Tell Me a Dad Joke 😄"):
-        st.info(random.choice(dad_jokes))
-
-    def reset():
-        st.session_state['started'] = False
-
-    st.button("🎉 Replay Surprise", on_click=reset)
+    center = st.columns(3)
+    with center[1]:
+        if st.button("🔁 Replay Surprise"):
+            st.session_state.started = False
+            st.experimental_rerun()
